@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { FabDelete } from '../../../src/calendar/components/FabDelete';
 import { useCalendarStore } from '../../../src/hooks/useCalendarStore';
 
-jest.mock('../../../src/hooks/useCalendarStore');
+jest.mock( '../../../src/hooks/useCalendarStore' );
 
 
 describe('Pruebas en <FabDelete />', () => {
@@ -12,13 +12,13 @@ describe('Pruebas en <FabDelete />', () => {
     beforeEach( ()=> jest.clearAllMocks() );
 
     
-    test('debe de mostrar el componente correctamente', () => {
+    test('<FabDelete /> debe de mostrar el componente correctamente', () => {
 
         useCalendarStore.mockReturnValue({
             hasEventSelected: false
         });
         
-        render(<FabDelete />);
+        render( <FabDelete /> );
 
         const btn = screen.getByLabelText('btn-delete');
         // console.log(btn.classList.toString());
@@ -29,7 +29,7 @@ describe('Pruebas en <FabDelete />', () => {
         
     });
 
-    test('debe de mostrar el botón si hay un evento activo', () => {
+    test('<FabDelete /> debe de mostrar el botón si hay un evento activo', () => {
 
         useCalendarStore.mockReturnValue({
             hasEventSelected: true
@@ -43,7 +43,7 @@ describe('Pruebas en <FabDelete />', () => {
         
     });
 
-    test('debe de llamar startDeletingEvent si hay evento activo', () => {
+    test('<FabDelete /> debe de llamar startDeletingEvent si hay evento activo', () => {
 
         useCalendarStore.mockReturnValue({
             hasEventSelected: true,

@@ -6,6 +6,7 @@ import { uiSlice } from '../../src/store';
 
 
 const getMockStore = ( initialState ) => {
+
     return configureStore({
         reducer: {
             ui: uiSlice.reducer
@@ -19,7 +20,7 @@ const getMockStore = ( initialState ) => {
 
 describe('Pruebas en useUiStore', () => {
 
-    test('debe de regresar los valores por defecto', () => {
+    test('useUiStore debe de regresar los valores por defecto', () => {
 
         const mockStore = getMockStore({ isDateModalOpen: false });
 
@@ -27,11 +28,11 @@ describe('Pruebas en useUiStore', () => {
             wrapper: ({ children }) => <Provider store={ mockStore }>{ children }</Provider>
         });
 
-        expect(result.current).toEqual({
+        expect( result.current ).toEqual({
             isDateModalOpen: false,
-            closeDateModal: expect.any(Function),
-            openDateModal: expect.any(Function),
-            toggleDateModal: expect.any(Function),
+            closeDateModal: expect.any( Function ),
+            openDateModal: expect.any( Function ),
+            toggleDateModal: expect.any( Function ),
         });
         
     });

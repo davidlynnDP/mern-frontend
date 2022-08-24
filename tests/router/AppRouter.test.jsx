@@ -1,15 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { CalendarPage } from '../../src/calendar';
+import { CalendarPage } from '../../src/calendar/pages/CalendarPage';
 import { useAuthStore } from '../../src/hooks/useAuthStore';
 import { AppRouter } from '../../src/router/AppRouter';
 
-jest.mock('../../src/hooks/useAuthStore');
 
-jest.mock('../../src/calendar', () => ({
+
+jest.mock( '../../src/hooks/useAuthStore' );
+
+jest.mock( '../../src/calendar', () => ({
     CalendarPage: () => <h1>CalendarPage</h1>
 }))
-
 
 
 
@@ -17,10 +18,10 @@ describe('Pruebas en <AppRouter />', () => {
 
     const mockCheckAuthToken = jest.fn();
 
-    beforeEach(() => jest.clearAllMocks() );
+    beforeEach( () => jest.clearAllMocks() );
 
 
-    test('debe de mostrar la pantalla de carga y llamar checkAuthToken', () => {
+    test('<AppRouter /> debe de mostrar la pantalla de carga y llamar checkAuthToken()', () => {
 
         useAuthStore.mockReturnValue({
             status: 'checking',
@@ -28,12 +29,13 @@ describe('Pruebas en <AppRouter />', () => {
         });
 
         render( <AppRouter /> )
-        expect( screen.getByText('Cargando...') ).toBeTruthy() 
-        expect( mockCheckAuthToken ).toHaveBeenCalled();
+
+        expect( screen.getByText( 'Cargando...' ) ).toBeTruthy() 
+        expect( mockCheckAuthToken ).toHaveBeenCalled()
 
     });
 
-    test('debe de mostrar el login en caso de no estar autenticado', () => {
+    test('<AppRouter /> debe de mostrar el login en caso de NO estar autenticado', () => {
         
         useAuthStore.mockReturnValue({
             status: 'not-authenticated',
@@ -41,16 +43,16 @@ describe('Pruebas en <AppRouter />', () => {
         });
 
         const { container } = render(
-            <MemoryRouter initialEntries={['/auth2/algo/otracosa']}>
+            <MemoryRouter initialEntries={[ '/auth2/algo/otracosa' ]}>
                 <AppRouter />
             </MemoryRouter>
         );
 
-        expect( screen.getByText('Ingreso') ).toBeTruthy();
+        expect( screen.getByText( 'Ingreso' ) ).toBeTruthy();
         expect( container ).toMatchSnapshot(); 
     });
 
-    test('debe de mostrar el calendario si estamos autenticados', () => {
+    test('<AppRouter /> debe de mostrar el calendario SI estamos autenticados', () => {
         
         useAuthStore.mockReturnValue({
             status: 'authenticated',
@@ -63,7 +65,7 @@ describe('Pruebas en <AppRouter />', () => {
             </MemoryRouter>
         );
 
-        expect( screen.getByText('CalendarPage') ).toBeTruthy();
+        expect( screen.getByText( 'CalendarPage' ) ).toBeTruthy();
         
     });
     

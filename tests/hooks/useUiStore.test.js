@@ -18,7 +18,7 @@ const getMockStore = ( initialState ) => {
 }
 
 
-describe('Pruebas en useUiStore', () => {
+describe('Pruebas en el custom hook de useUiStore', () => {
 
     test('useUiStore debe de regresar los valores por defecto', () => {
 
@@ -37,9 +37,10 @@ describe('Pruebas en useUiStore', () => {
         
     });
 
-    test('openDateModal debe de colocar tru en el isDateModalOpen', () => {
+    test('useUiStore la funcion de openDateModal() debe de colocar true en el isDateModalOpen', () => {
         
         const mockStore = getMockStore({ isDateModalOpen: false });
+
         const { result } = renderHook( () => useUiStore(), {
             wrapper: ({ children }) => <Provider store={ mockStore }>{ children }</Provider>
         });
@@ -56,7 +57,7 @@ describe('Pruebas en useUiStore', () => {
     });
 
 
-    test('closeDateModal debe de colocar false en isDateModalOpen', () => {
+    test('useUiStore la funcion de closeDateModal() debe de colocar false en isDateModalOpen', () => {
         
         const mockStore = getMockStore({ isDateModalOpen: true });
         const { result } = renderHook( () => useUiStore(), {
@@ -72,7 +73,7 @@ describe('Pruebas en useUiStore', () => {
     });
 
 
-    test('toggleDateModal debe de cambiar el estado respectivamente', () => {
+    test('useUiStore la funcion de toggleDateModal() debe de cambiar el estado respectivamente', () => {
         
         const mockStore = getMockStore({ isDateModalOpen: true });
         const { result } = renderHook( () => useUiStore(), {

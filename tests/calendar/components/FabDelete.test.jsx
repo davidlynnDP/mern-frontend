@@ -20,42 +20,42 @@ describe('Pruebas en <FabDelete />', () => {
         
         render( <FabDelete /> );
 
-        const btn = screen.getByLabelText('btn-delete');
+        const btn = screen.getByLabelText( 'btn-delete' );
         // console.log(btn.classList.toString());
-        expect( btn.classList ).toContain('btn');
-        expect( btn.classList ).toContain('btn-danger');
-        expect( btn.classList ).toContain('fab-danger');
-        expect( btn.style.display ).toBe('none');
+        expect( btn.classList ).toContain( 'btn' );
+        expect( btn.classList ).toContain( 'btn-danger' );
+        expect( btn.classList ).toContain( 'fab-danger' );
+        expect( btn.style.display ).toBe( 'none' );
         
     });
 
-    test('<FabDelete /> debe de mostrar el botón si hay un evento activo', () => {
+    test('<FabDelete /> debe de mostrar el botón SI hay un evento activo', () => {
 
         useCalendarStore.mockReturnValue({
             hasEventSelected: true
         });
         
-        render(<FabDelete />);
+        render( <FabDelete /> );
 
-        const btn = screen.getByLabelText('btn-delete');
+        const btn = screen.getByLabelText( 'btn-delete' );
         // console.log(btn.classList.toString());
-        expect( btn.style.display ).toBe('');
+        expect( btn.style.display ).toBe( '' );
         
     });
 
-    test('<FabDelete /> debe de llamar startDeletingEvent si hay evento activo', () => {
+    test('<FabDelete /> debe de llamar startDeletingEvent() SI hay evento activo', () => {
 
         useCalendarStore.mockReturnValue({
             hasEventSelected: true,
             startDeletingEvent: mockStartDeletingEvent
         });
         
-        render(<FabDelete />);
+        render( <FabDelete /> );
 
-        const btn = screen.getByLabelText('btn-delete');
+        const btn = screen.getByLabelText( 'btn-delete' );
         fireEvent.click( btn );
 
-        expect( mockStartDeletingEvent ).toHaveBeenCalledWith();
+        expect( mockStartDeletingEvent ).toHaveBeenCalled();
         
         
     });
